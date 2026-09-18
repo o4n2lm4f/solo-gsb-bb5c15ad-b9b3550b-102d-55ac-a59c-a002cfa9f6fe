@@ -1,0 +1,19 @@
+{
+  "name": "cue-sync",
+  "version": "1.0.0",
+  "description": "舞台排练口令同步 Web 应用：导演发令、岗位确认、超时/重复实时标记、断线恢复、事件日志",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "up": "npm install && node server.js",
+    "test": "node test/e2e.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "4.19.2",
+    "ws": "8.18.0"
+  }
+}

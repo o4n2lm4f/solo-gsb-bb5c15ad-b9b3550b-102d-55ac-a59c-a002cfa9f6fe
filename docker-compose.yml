@@ -1,0 +1,16 @@
+services:
+  cue-sync:
+    build: .
+    image: cue-sync:latest
+    container_name: cue-sync
+    ports:
+      # 宿主机 3000 端口 -> 容器 3000 端口（可通过环境变量 CUE_SYNC_PORT 修改宿主机端口）
+      - "${CUE_SYNC_PORT:-3000}:3000"
+    environment:
+      - PORT=3000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:3000/healthz',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"]
+      interval: 15s
+      timeout: 3s
+      retries: 3

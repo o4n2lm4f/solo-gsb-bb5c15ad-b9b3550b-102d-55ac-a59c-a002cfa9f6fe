@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>舞台排练口令同步</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎭 舞台排练口令同步系统</h1>
+    <span class="sub">Cue Sync</span>
+  </header>
+
+  <div class="hero">
+    <h1>口令同步</h1>
+    <p>导演统一发令 · 目标岗位逐一确认 · 超时/重复实时标记 · 断线自动恢复</p>
+  </div>
+
+  <div class="entry-cards">
+    <a class="entry-card" href="director.html">
+      <div class="ico">🎬</div>
+      <h3>导演控制端</h3>
+      <p>创建岗位与口令序列、发出当前口令、监督确认进度、查看本场事件日志。</p>
+    </a>
+    <a class="entry-card" href="position.html">
+      <div class="ico">💡</div>
+      <h3>岗位执行端</h3>
+      <p>灯光 / 音响 / 布景等岗位打开本页。仅当口令指向本岗位时才能确认。</p>
+    </a>
+  </div>
+
+  <p class="muted" style="text-align:center">
+    岗位端也可直接使用 <code>/position.html?name=岗位名</code> 打开对应岗位页面。
+  </p>
+</body>
+</html>

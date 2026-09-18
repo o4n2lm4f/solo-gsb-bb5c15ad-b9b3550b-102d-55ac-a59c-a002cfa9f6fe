@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>导演控制端 · 口令同步</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎬 导演控制端</h1>
+    <span class="sub" id="subtitle"></span>
+    <span class="spacer"></span>
+    <span class="conn" id="conn"><span class="dot"></span><span id="connText">连接中…</span></span>
+    <a class="btn" href="/">← 返回入口</a>
+  </header>
+
+  <main>
+    <!-- 当前口令舞台 -->
+    <section class="panel" style="margin-bottom:16px">
+      <h2>当前口令 <span class="tag" id="stageTag">—</span></h2>
+      <div class="stage idle" id="stage">
+        <div class="seq-line" id="stageSeq">尚未发出任何口令</div>
+        <div class="command" id="stageCommand">等待导演发令</div>
+        <div class="targets" id="stageTargets"></div>
+        <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="stage-meta" id="stageMeta"></div>
+      </div>
+      <div class="flex-between mt12">
+        <div class="muted" id="emitHint"></div>
+        <div style="display:flex;gap:8px">
+          <button id="btnForceClose" class="danger" style="display:none">强制关闭本条（记入日志）</button>
+          <button id="btnEmit" class="primary">发出下一条</button>
+          <button id="btnReset" class="danger ghost sm">开启新场次（清空序列与日志）</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid three">
+      <!-- 岗位管理 -->
+      <section class="panel">
+        <h2>岗位 <span class="tag">参演岗位</span></h2>
+        <div class="row">
+          <div>
+            <label for="posName">新增岗位名称</label>
+            <input type="text" id="posName" maxlength="20" placeholder="如：灯光 / 音响 / 布景">
+          </div>
+          <div style="flex:0 0 auto">
+            <button id="btnAddPos" class="primary">添加</button>
+          </div>
+        </div>
+        <div class="chips mt12" id="posChips"></div>
+        <p class="hint">绿点表示该岗位当前在线。已被口令引用的岗位不能删除。</p>
+      </section>
+
+      <!-- 编排口令 -->
+      <section class="panel">
+        <h2>编排口令 <span class="tag">序号自动生成</span></h2>
+        <label for="cueCommand">口令内容</label>
+        <input type="text" id="cueCommand" maxlength="100" placeholder="如：黑场，演员就位">
+        <label class="mt12">目标岗位（可多选）</label>
+        <div class="chips" id="cueTargets"></div>
+        <div class="row mt12">
+          <div class="narrow">
+            <label for="cueTimeout">确认时限（秒）</label>
+            <input type="number" id="cueTimeout" min="0" max="3600" value="30">
+          </div>
+          <div style="flex:0 0 auto;align-self:flex-end">
+            <button id="btnAddCue" class="primary">加入序列</button>
+          </div>
+        </div>
+        <p class="hint">0 表示不计时。超时仅打标，口令不会自动跳过。</p>
+      </section>
+
+      <!-- 序列 -->
+      <section class="panel">
+        <h2>演出序列 <span class="tag" id="cueCount"></span></h2>
+        <div class="cue-list" id="cueList"></div>
+      </section>
+    </div>
+
+    <!-- 日志 -->
+    <section class="panel mt16">
+      <h2>本场事件日志 <span class="tag">断线重连后仍保留（服务端内存）</span>
+        <span class="spacer"></span>
+        <button class="sm ghost" id="btnExport">导出日志 .txt</button>
+      </h2>
+      <div class="log-box" id="logBox"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="director.js"></script>
+</body>
+</html>

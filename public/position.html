@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>岗位执行端 · 口令同步</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>💡 岗位执行端</h1>
+    <span class="spacer"></span>
+    <span class="conn" id="conn"><span class="dot"></span><span id="connText">连接中…</span></span>
+    <a class="btn" href="/">← 返回入口</a>
+  </header>
+
+  <main class="position-wrap">
+    <!-- 未带 name 参数时显示选择面板 -->
+    <section class="panel" id="pickPanel" style="display:none">
+      <h2>选择岗位</h2>
+      <p class="muted" style="margin-bottom:10px">请选择你负责的岗位进入。岗位需先由导演在控制端创建。</p>
+      <div class="chips" id="pickChips"></div>
+      <div class="row mt12">
+        <input type="text" id="pickName" maxlength="20" placeholder="或直接输入岗位名">
+        <button id="pickGo" class="primary" style="flex:0 0 auto">进入岗位</button>
+      </div>
+    </section>
+
+    <!-- 岗位主面板 -->
+    <section class="panel" id="mainPanel" style="display:none">
+      <div class="flex-between">
+        <div>
+          <div class="muted">当前岗位</div>
+          <div class="position-name" id="myName"></div>
+        </div>
+        <div class="muted" id="cueCounter"></div>
+      </div>
+
+      <div class="stage idle mt16" id="stage">
+        <div class="seq-line" id="stageSeq">正在接收导演口令…</div>
+        <div class="command" id="stageCommand">—</div>
+        <div class="targets" id="stageTargets"></div>
+        <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="stage-meta" id="stageMeta"></div>
+      </div>
+
+      <button class="confirm-btn" id="btnConfirm" disabled>确　认</button>
+      <div class="status-line" id="statusLine">等待导演发令…</div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="position.js"></script>
+</body>
+</html>
